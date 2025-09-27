@@ -26,6 +26,12 @@ jobs:
             mkdir -p csy/$BRANCH_NAME
             cd csy/$BRANCH_NAME
             
+             # Инициализируем git если первый раз (через HTTPS)
+            if [ ! -d ".git" ]; then
+            echo "📥 Cloning repository..."
+            git clone https://github.com/dmitriev-dmitrii/csy.git .
+            fi
+  
             git fetch origin
             git checkout $BRANCH_NAME
             git pull origin $BRANCH_NAME
