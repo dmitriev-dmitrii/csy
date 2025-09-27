@@ -7,8 +7,8 @@ services:
       - ${BOT_PORT}:${BOT_PORT}
     build:
       context: ./
-#    volumes:
-#      - ./src:/src
+    volumes:
+      - ./data:/data
     networks:
       - csy-network
 networks:

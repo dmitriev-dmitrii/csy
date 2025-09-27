@@ -3,7 +3,7 @@
 /node_modules
 /build
 
-csy-wg/config/*
+csy-outline/config/*
 
 # Logs
 logs

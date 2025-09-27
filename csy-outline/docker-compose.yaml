@@ -1,0 +1,20 @@
+services:
+  csy-outline:
+    env_file: ../.env
+    image: outlinevpn/outline-server:latest
+    container_name: csy-outline
+    restart: unless-stopped
+    ports:
+      - "8080:${OUTLINE_API_PORT}"
+      - "1024-65535:${OUTLINE_PORT}"
+    environment:
+      - SB_API_PREFIX=/api
+    volumes:
+      - ./outline-data:/opt/outline/persisted-state
+    cap_add:
+      - NET_ADMIN
+    networks:
+          - csy-network
+networks:
+    csy-network:
+            external: true
