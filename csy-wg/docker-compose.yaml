@@ -1,6 +1,6 @@
 services:
   csy-wg:
-    image: lscr.io/linuxserver/wireguard:v1.0.8
+    image: lscr.io/linuxserver/wireguard:latest
     container_name: csy-wg
     restart: unless-stopped
     ports:
