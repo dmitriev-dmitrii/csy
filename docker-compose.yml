@@ -6,3 +6,7 @@ services:
     restart: unless-stopped
     ports:
       - "${PORT}:${PORT}"
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - API_URL=${API_URL}
+      - API_CERT=${API_CERT}
