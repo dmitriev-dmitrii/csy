@@ -1,19 +1,12 @@
 services:
   csy-bot:
+    env_file: .env
     build: .
     container_name: csy-bot
     restart: unless-stopped
     ports:
-      - "3000:3000"
-    volumes:
-      - ./data:/app/data
+      - "${PORT}:${PORT}"
     environment:
       - BOT_TOKEN=${BOT_TOKEN}
-      - OUTLINE_API_URL=${OUTLINE_API_URL}
-      - OUTLINE_CERT=${OUTLINE_CERT}
-    networks:
-      - csy-network
-
-networks:
-  csy-network:
-    driver: bridge
+      - API_URL=${API_URL}
+      - API_CERT=${API_CERT}

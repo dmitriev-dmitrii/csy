@@ -1,0 +1,31 @@
+name: csy deploy
+
+on:
+  push:
+    branches: [develop, master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_KEY }}
+          script: |
+            cd /csy
+            # BRANCH_NAME
+            export BRANCH_NAME=${GITHUB_REF#refs/heads/}
+            echo "Deploying branch: $BRANCH_NAME"
+            
+            git fetch origin
+            git checkout $BRANCH_NAME
+            git pull origin $BRANCH_NAME
+            
+            docker compose down
+            docker compose up -d --build
