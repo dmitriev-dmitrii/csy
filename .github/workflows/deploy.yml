@@ -19,12 +19,14 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_KEY }}
           script: |
+            mkdir -p csy
+            cd csy
+            
             # BRANCH_NAME
             export BRANCH_NAME=${GITHUB_REF#refs/heads/}
             echo "Deploying branch: $BRANCH_NAME"
             
-            mkdir -p csy/$BRANCH_NAME
-            cd csy/$BRANCH_NAME
+#            cd csy/$BRANCH_NAME
             
             if [ ! -d ".git" ]; then
             echo "Cloning repository..."
