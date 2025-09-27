@@ -2,7 +2,8 @@ name: csy deploy
 
 on:
   push:
-    branches: [develop, master]
+    branches: [ master]
+#    branches: [develop, master]
 
 jobs:
   deploy:
@@ -21,19 +22,14 @@ jobs:
           script: |
             # BRANCH_NAME
             export BRANCH_NAME=${GITHUB_REF#refs/heads/}
-            echo "Deploying branch: $BRANCH_NAME"
-            
-            mkdir -p csy/$BRANCH_NAME
-            cd csy/$BRANCH_NAME
             
             if [ ! -d ".git" ]; then
             echo "Cloning repository..."
-            git clone https://github.com/dmitriev-dmitrii/csy.git .
+            git clone git@github.com:dmitriev-dmitrii/csy.git
             fi
   
             git fetch origin
             git checkout $BRANCH_NAME
             git pull origin $BRANCH_NAME
             
-            make down
             make up
