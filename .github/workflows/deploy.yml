@@ -15,7 +15,7 @@ jobs:
       - name: Deploy
         uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ vars.VPS_IP }}
+          host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_KEY }}
           script: |
@@ -36,5 +36,4 @@ jobs:
             git pull origin $BRANCH_NAME
             
             make down
-
             make up
