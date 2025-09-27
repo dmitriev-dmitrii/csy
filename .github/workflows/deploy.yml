@@ -36,5 +36,4 @@ jobs:
             git pull origin $BRANCH_NAME
             
             make down
-            make build
             make up
