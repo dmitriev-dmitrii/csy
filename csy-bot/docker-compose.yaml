@@ -1,0 +1,11 @@
+services:
+  csy-bot:
+    env_file: ../.env
+    container_name: csy-bot
+    restart: unless-stopped
+    ports:
+      - ${PORT}:${PORT}
+    build:
+      context: ./
+#    volumes:
+#      - ./src:/src
