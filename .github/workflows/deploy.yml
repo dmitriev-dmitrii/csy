@@ -35,5 +35,6 @@ jobs:
             git checkout $BRANCH_NAME
             git pull origin $BRANCH_NAME
             
-            docker compose down
-            docker compose up -d --build
+            make down
+            make build
+            make up

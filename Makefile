@@ -1,18 +1,15 @@
 include .env
-export
 
-bot-up:
-	cd bot && docker-compose up -d
+up:
+	@cd bot && docker compose --env-file ../.env up -d
 
-bot-down:
+down:
 	cd bot && docker-compose down
 
-bot-build:
-	cd bot && docker-compose build
+build:
+	cd bot && docker-compose --env-file ../.env build
 
-deploy-bot: down build up
-
-clean-bot:
+clean:
 	cd bot && docker-compose down -v --rmi all
 
 
