@@ -1,0 +1,18 @@
+services:
+  csy-wg:
+    image: lscr.io/linuxserver/wireguard:latest
+    container_name: csy-wg
+    restart: unless-stopped
+    ports:
+      - "51820:51820/udp"
+    environment:
+      - SERVERURL=${VPS_IP}
+    volumes:
+      - ./config:/config
+    cap_add:
+      - NET_ADMIN
+    networks:
+          - csy-network
+networks:
+    csy-network:
+            external: true

@@ -9,3 +9,8 @@ services:
       context: ./
 #    volumes:
 #      - ./src:/src
+    networks:
+      - csy-network
+networks:
+  csy-network:
+    external: true
