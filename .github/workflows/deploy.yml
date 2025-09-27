@@ -23,9 +23,12 @@ jobs:
             # BRANCH_NAME
             export BRANCH_NAME=${GITHUB_REF#refs/heads/}
             
+            mkdir -p csy
+            cd csy
+            
             if [ ! -d ".git" ]; then
             echo "Cloning repository..."
-            git clone git@github.com:dmitriev-dmitrii/csy.git
+            git clone git@github.com:dmitriev-dmitrii/csy.git .
             fi
   
             git fetch origin
