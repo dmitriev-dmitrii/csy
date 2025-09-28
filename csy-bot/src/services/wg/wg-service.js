@@ -1,5 +1,8 @@
+import {env} from "../../constants/env.js";
 
-const WG_API_URL = `http://localhost:${process.env.WG_API_PORT}`;
+const {WG_API_PORT} = env
+
+const WG_API_URL = `http://localhost:${WG_API_PORT}`;
 
 export const wgService = {
 

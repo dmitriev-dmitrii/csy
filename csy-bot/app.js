@@ -8,9 +8,8 @@ import cookieParser from "cookie-parser";
 import Fingerprint from "express-fingerprint";
 import morgan  from  'morgan';
 import {setupTelegramBot} from "./src/telegram/index.js";
-import {env} from "./src/constants/env.js";
 import {initUsersDb} from "./src/storage/users/users-storage.js";
-import {wgService} from "./src/services/wg/wg-service.js";
+import {env} from "./src/constants/env.js";
 
 const { BOT_PORT,BOT_TOKEN  } = env
 
@@ -40,7 +39,4 @@ server.listen(BOT_PORT,  async () => {
 
     await  setupTelegramBot( BOT_TOKEN )
     await  initUsersDb();
-    const r =  await wgService.getWgStatus()
-    console.log(r)
 });
-

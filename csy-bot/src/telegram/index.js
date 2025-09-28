@@ -1,10 +1,11 @@
 import {Telegraf} from "telegraf";
 import { message , callbackQuery } from 'telegraf/filters'
-import {COMMANDS} from "./constants/commands.js";
+
 import {CREATE_CONFIG_BUTTON, PROFILE_BUTTON, WG_STATUS_BUTTON} from "./constants/buttons.js";
 import {env} from "../constants/env.js";
 import {usersService} from "../services/users/users-service.js";
 import {wgService} from "../services/wg/wg-service.js";
+import {COMMANDS} from "./constants/commands.js";
 
 const {BOT_TOKEN } = env
 
@@ -13,9 +14,9 @@ const bot = new Telegraf(BOT_TOKEN)
 function setupHandlers() {
 
     const CALLBACK_COMMANDS_MAP = {
-        [COMMANDS.CREATE_CONFIG]: handleCreateConfig,
+        // [COMMANDS.CREATE_CONFIG]: handleCreateConfig,
         [COMMANDS.PROFILE]: handleProfile,
-        [WG_STATUS_BUTTON]: checkWgStatus
+        // [WG_STATUS_BUTTON]: checkWgStatus
     };
 
     bot.start(async (ctx) => {

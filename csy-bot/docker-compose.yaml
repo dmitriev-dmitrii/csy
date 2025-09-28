@@ -4,11 +4,12 @@ services:
     container_name: csy-bot
     restart: unless-stopped
     ports:
-      - ${BOT_PORT}:${BOT_PORT}
+      - "5001:5001"
     build:
       context: ./
     volumes:
       - ./data:/data
+      - ./src:/app/src
     networks:
       - csy-network
 networks:

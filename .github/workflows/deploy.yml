@@ -35,4 +35,15 @@ jobs:
             git checkout $BRANCH_NAME
             git pull origin $BRANCH_NAME
             
+            
+            cat > .env << EOF
+            
+            BOT_TOKEN=${{ secrets.BOT_TOKEN }}
+            WG_PASSWORD=${{ secrets.WG_PASSWORD }}
+            VPS_IP=${{ secrets.VPS_IP }}
+            BOT_PORT=5001
+            WG_API_PORT=5000
+            
+            EOF
+            
             make up
