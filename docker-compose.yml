@@ -1,0 +1,32 @@
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    depends_on:
+      - openvpn
+
+  openvpn:
+    image: openvpn/openvpn-as
+    container_name: openvpn
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      - "943:943"      # Web UI (HTTPS)
+      - "1194:1194/udp" # VPN UDP
+    volumes:
+      - ./openvpn-data:/openvpn
+    restart: unless-stopped
+
+
+
+

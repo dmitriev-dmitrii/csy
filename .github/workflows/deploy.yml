@@ -2,16 +2,15 @@ name: csy deploy
 
 on:
   push:
-    branches: [ master]
-#    branches: [develop, master]
+    branches: [ master ]
 
 jobs:
   deploy:
     runs-on: ubuntu-24.04
-    environment: ${{ github.ref == 'refs/heads/master' && 'master' || 'develop' }}
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Deploy
         uses: appleboy/ssh-action@v0.1.6
@@ -20,8 +19,6 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_KEY }}
           script: |
-            # BRANCH_NAME
-            export BRANCH_NAME=${GITHUB_REF#refs/heads/}
             
             mkdir -p csy
             cd csy
@@ -31,15 +28,7 @@ jobs:
             git clone git@github.com:dmitriev-dmitrii/csy.git .
             fi
   
-            git fetch origin
-            git checkout $BRANCH_NAME
-            git pull origin $BRANCH_NAME
-            
-            cat > .env << EOF
-            BOT_TOKEN="${{ secrets.BOT_TOKEN }}"
-            WG_PASSWORD="${{ secrets.WG_PASSWORD }}"
-            VPS_IP="${{ secrets.VPS_IP }}"
-            BOT_PORT="5001"
-            WG_API_PORT="5000"
-            EOF
+            git fetch origin --depth=1
+            git pull --ff-only origin master
+
             make up
